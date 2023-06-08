@@ -1,0 +1,18 @@
+# push [value] : Pushes value
+# pop          : Pops last value
+# print        : Prints last value
+# add          : Adds last two values
+# sub          : Subtracts last two values
+# mul          : Multiplies last two values
+# [call]       : Calls with id
+# if           : Defines if
+# endif        : Ends if definition
+# loop         : Defines loop
+# endloop      : Ends loop definition
+# func [id]    : Defines func with id
+# endfunc      : Ends func definition
+# cont         : Continues from last loop
+# ret          : Returns from last function
+
+push 100
+print
