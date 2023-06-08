@@ -68,6 +68,12 @@ func Compile(text string) []interpreter.Instruction {
 			instructions = append(instructions, interpreter.Cmp{
 				Comparison: fields[1],
 			})
+		case "div":
+			instructions = append(instructions, interpreter.Div{})
+		case "rem":
+			instructions = append(instructions, interpreter.Rem{})
+		case "dup":
+			instructions = append(instructions, interpreter.Dup{})
 		default:
 			instructions = append(instructions, interpreter.Call{
 				Identifier: term,

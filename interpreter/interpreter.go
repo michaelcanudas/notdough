@@ -10,9 +10,9 @@ func Interpret(instructions []Instruction) {
 	}
 
 	for i := 0; i < len(context.Instructions); i++ {
-		switch context.Instructions[i].(type) {
-		case Func:
-			context.FuncMap[context.Instructions[i].(Func).Identifier] = int64(i)
+		var f, ok = context.Instructions[i].(Func)
+		if ok {
+			context.FuncMap[f.Identifier] = int64(i)
 		}
 	}
 
