@@ -64,6 +64,10 @@ func Compile(text string) []interpreter.Instruction {
 			instructions = append(instructions, interpreter.Endfunc{})
 		case "ret":
 			instructions = append(instructions, interpreter.Ret{})
+		case "cmp":
+			instructions = append(instructions, interpreter.Cmp{
+				Comparison: fields[1],
+			})
 		default:
 			instructions = append(instructions, interpreter.Call{
 				Identifier: term,

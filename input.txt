@@ -15,4 +15,6 @@
 # ret          : Returns from last function
 
 push 100
+push 101
+cmp !=
 print
