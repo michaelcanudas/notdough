@@ -9,9 +9,7 @@ indirect function calls
 - some loadfn instruction
 - some callfn instruction
 
-bitwise & logical and/or/xor/not
-negate (neg)
-bit shift left/right (maybe shl/shr ?)
+bitwise operators and shifts
 
 far down the road ;)
 - different data types (float64, float32, int32 should be all we need (or maybe uints too?) )

@@ -44,8 +44,18 @@ func Compile(text string) []interpreter.Instruction {
 			instructions = append(instructions, interpreter.Add{})
 		case "sub":
 			instructions = append(instructions, interpreter.Sub{})
+		case "neg":
+			instructions = append(instructions, interpreter.Neg{})
 		case "mul":
 			instructions = append(instructions, interpreter.Mul{})
+		case "div":
+			instructions = append(instructions, interpreter.Div{})
+		case "rem":
+			instructions = append(instructions, interpreter.Rem{})
+		case "dup":
+			instructions = append(instructions, interpreter.Dup{})
+		case "read":
+			instructions = append(instructions, interpreter.Read{})
 		case "if":
 			instructions = append(instructions, interpreter.If{})
 		case "endif":
@@ -68,14 +78,22 @@ func Compile(text string) []interpreter.Instruction {
 			instructions = append(instructions, interpreter.Cmp{
 				Comparison: fields[1],
 			})
-		case "div":
-			instructions = append(instructions, interpreter.Div{})
-		case "rem":
-			instructions = append(instructions, interpreter.Rem{})
-		case "dup":
-			instructions = append(instructions, interpreter.Dup{})
-		case "read":
-			instructions = append(instructions, interpreter.Read{})
+		case "and":
+			instructions = append(instructions, interpreter.And{})
+		case "or":
+			instructions = append(instructions, interpreter.Or{})
+		case "xor":
+			instructions = append(instructions, interpreter.Xor{})
+		case "not":
+			instructions = append(instructions, interpreter.Not{})
+		case "store":
+			instructions = append(instructions, interpreter.Store{
+				Identifier: fields[1],
+			})
+		case "load":
+			instructions = append(instructions, interpreter.Load{
+				Identifier: fields[1],
+			})
 		default:
 			instructions = append(instructions, interpreter.Call{
 				Identifier: term,

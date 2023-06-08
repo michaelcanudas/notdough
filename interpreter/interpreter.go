@@ -2,8 +2,9 @@ package interpreter
 
 func Interpret(instructions []Instruction) {
 	context := Context{
-		ReturnStack:    Stack[int64]{},
+		LocalStack:     Stack[map[string]int64]{make(map[string]int64)},
 		ExecutionStack: Stack[int64]{},
+		ReturnStack:    Stack[int64]{},
 		FuncMap:        map[string]int64{},
 		Instructions:   instructions,
 		Pointer:        0,
