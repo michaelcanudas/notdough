@@ -8,6 +8,12 @@ import (
 type Read struct {
 }
 
+func init() {
+	RegisterInstruction("read", func(fields []string) Instruction {
+		return Read{}
+	})
+}
+
 func (r Read) execute(ctx *Context) {
 	var value int64 = 0
 

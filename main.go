@@ -27,5 +27,5 @@ func main() {
 		}
 	}
 
-	interpreter.Interpret(compiler.Compile(string(input)))
+	interpreter.Interpret(compiler.Compile(string(input), interpreter.RegisteredInstructionProviders))
 }

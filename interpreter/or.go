@@ -4,6 +4,14 @@ type Or struct {
 	Bitwise bool
 }
 
+func init() {
+	RegisterInstruction("or", func(fields []string) Instruction {
+		return Or{
+			Bitwise: HasBitwiseModifier(fields),
+		}
+	})
+}
+
 func (or Or) execute(ctx *Context) {
 	var a = ctx.ExecutionStack.Pop()
 	var b = ctx.ExecutionStack.Pop()

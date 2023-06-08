@@ -22,3 +22,15 @@ func Interpret(instructions []Instruction) {
 		context.Pointer++
 	}
 }
+
+type InstructionProviderMap map[string]func(fields []string) Instruction
+
+var RegisteredInstructionProviders InstructionProviderMap
+
+func RegisterInstruction(name string, createInstruction func(fields []string) Instruction) {
+	if RegisteredInstructionProviders == nil {
+		RegisteredInstructionProviders = make(InstructionProviderMap)
+	}
+
+	RegisteredInstructionProviders[name] = createInstruction
+}

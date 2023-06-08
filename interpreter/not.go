@@ -4,6 +4,14 @@ type Not struct {
 	Bitwise bool
 }
 
+func init() {
+	RegisterInstruction("not", func(fields []string) Instruction {
+		return Not{
+			Bitwise: HasBitwiseModifier(fields),
+		}
+	})
+}
+
 func (n Not) execute(ctx *Context) {
 	var a = ctx.ExecutionStack.Pop()
 

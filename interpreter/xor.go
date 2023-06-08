@@ -4,6 +4,14 @@ type Xor struct {
 	Bitwise bool
 }
 
+func init() {
+	RegisterInstruction("xor", func(fields []string) Instruction {
+		return Xor{
+			Bitwise: HasBitwiseModifier(fields),
+		}
+	})
+}
+
 func (x Xor) execute(ctx *Context) {
 	var a = ctx.ExecutionStack.Pop()
 	var b = ctx.ExecutionStack.Pop()
