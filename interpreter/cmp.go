@@ -31,6 +31,7 @@ func (c Cmp) execute(ctx *Context) {
 	}
 
 	// there has got to be a better way to do this :/
+	// no :(
 	var value int64
 	if result {
 		value = 1
