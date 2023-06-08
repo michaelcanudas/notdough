@@ -1,12 +1,28 @@
 package interpreter
 
 type Xor struct {
+	Bitwise bool
 }
 
 func (x Xor) execute(ctx *Context) {
 	var a = ctx.ExecutionStack.Pop()
 	var b = ctx.ExecutionStack.Pop()
 
+	var value int64
+	if x.Bitwise {
+		value = x.executeBitwise(a, b)
+	} else {
+		value = x.executeLogical(a, b)
+	}
+
+	ctx.ExecutionStack.Push(value)
+}
+
+func (x Xor) executeBitwise(a int64, b int64) int64 {
+	return a ^ b
+}
+
+func (x Xor) executeLogical(a int64, b int64) int64 {
 	if a != 0 {
 		a = 1
 	}
@@ -23,5 +39,5 @@ func (x Xor) execute(ctx *Context) {
 		value = 0
 	}
 
-	ctx.ExecutionStack.Push(value)
+	return value
 }

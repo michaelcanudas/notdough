@@ -8,6 +8,8 @@ import (
 )
 
 func Compile(text string) []interpreter.Instruction {
+	const bitwiseKeyword string = "bits" // should this be "bitwise" instead ?
+
 	lines := strings.Split(text, "\n")
 
 	var instructions []interpreter.Instruction
@@ -79,13 +81,21 @@ func Compile(text string) []interpreter.Instruction {
 				Comparison: fields[1],
 			})
 		case "and":
-			instructions = append(instructions, interpreter.And{})
+			instructions = append(instructions, interpreter.And{
+				Bitwise: len(fields) >= 2 && fields[1] == bitwiseKeyword,
+			})
 		case "or":
-			instructions = append(instructions, interpreter.Or{})
+			instructions = append(instructions, interpreter.Or{
+				Bitwise: len(fields) >= 2 && fields[1] == bitwiseKeyword,
+			})
 		case "xor":
-			instructions = append(instructions, interpreter.Xor{})
+			instructions = append(instructions, interpreter.Xor{
+				Bitwise: len(fields) >= 2 && fields[1] == bitwiseKeyword,
+			})
 		case "not":
-			instructions = append(instructions, interpreter.Not{})
+			instructions = append(instructions, interpreter.Not{
+				Bitwise: len(fields) >= 2 && fields[1] == bitwiseKeyword,
+			})
 		case "store":
 			instructions = append(instructions, interpreter.Store{
 				Identifier: fields[1],
