@@ -74,6 +74,8 @@ func Compile(text string) []interpreter.Instruction {
 			instructions = append(instructions, interpreter.Rem{})
 		case "dup":
 			instructions = append(instructions, interpreter.Dup{})
+		case "read":
+			instructions = append(instructions, interpreter.Read{})
 		default:
 			instructions = append(instructions, interpreter.Call{
 				Identifier: term,
