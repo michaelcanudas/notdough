@@ -5,6 +5,6 @@ type Call struct {
 }
 
 func (c Call) execute(ctx *Context) {
-	ctx.ReturnStack = append(ctx.ReturnStack, ctx.Pointer)
+	ctx.ReturnStack.Push(ctx.Pointer)
 	ctx.Pointer = ctx.FuncMap[c.Identifier]
 }

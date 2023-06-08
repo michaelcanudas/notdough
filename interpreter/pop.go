@@ -5,5 +5,5 @@ type Pop struct {
 }
 
 func (p Pop) execute(ctx *Context) {
-	ctx.Stack = ctx.Stack[:len(ctx.Stack) - int(p.Count)]
+	ctx.ExecutionStack.Pop()
 }

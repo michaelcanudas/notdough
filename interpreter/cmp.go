@@ -8,8 +8,8 @@ type Cmp struct {
 
 func (c Cmp) execute(ctx *Context) {
 	// pop operands off execution stack
-	var a = ctx.Stack[len(ctx.Stack)-1]
-	var b = ctx.Stack[len(ctx.Stack)-2]
+	var a = ctx.ExecutionStack.Pop()
+	var b = ctx.ExecutionStack.Pop()
 
 	// actually do the comparison
 	var result bool
@@ -38,6 +38,5 @@ func (c Cmp) execute(ctx *Context) {
 		value = 0
 	}
 
-	// pop operands off the stack and append value
-	ctx.Stack = append(ctx.Stack[:len(ctx.Stack)-2], value)
+	ctx.ExecutionStack.Push(value)
 }

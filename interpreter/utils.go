@@ -1,12 +1,27 @@
 package interpreter
 
+type Stack[T any] []T
+
+// Push pushes an element to the top of a stack.
+func (stack *Stack[T]) Push(element T) {
+	*stack = append(*stack, element)
+}
+
+// Pop removes and returns the topmost element of a stack.
+func (stack *Stack[T]) Pop() T {
+	var index = len(*stack) - 1  // index of topmost element
+	var result = (*stack)[index] // get result value
+	*stack = (*stack)[:index]    // shrink stack
+	return result
+}
+
 func FindEndif(ctx *Context) int64 {
 	loc := ctx.Pointer
 	depth := 1
-	
+
 	for depth > 0 {
 		loc++
-		
+
 		switch ctx.Instructions[loc].(type) {
 		case If:
 			depth++
@@ -14,17 +29,17 @@ func FindEndif(ctx *Context) int64 {
 			depth--
 		}
 	}
-	
+
 	return loc
 }
 
 func FindEndfunc(ctx *Context) int64 {
 	loc := ctx.Pointer
 	depth := 1
-	
+
 	for depth > 0 {
 		loc++
-		
+
 		switch ctx.Instructions[loc].(type) {
 		case Func:
 			depth++
@@ -32,17 +47,17 @@ func FindEndfunc(ctx *Context) int64 {
 			depth--
 		}
 	}
-	
+
 	return loc
 }
 
 func FindLoop(ctx *Context) int64 {
 	loc := ctx.Pointer
 	depth := 1
-	
+
 	for depth > 0 {
 		loc--
-		
+
 		switch ctx.Instructions[loc].(type) {
 		case Loop:
 			depth--
@@ -50,6 +65,6 @@ func FindLoop(ctx *Context) int64 {
 			depth++
 		}
 	}
-	
+
 	return loc
 }
