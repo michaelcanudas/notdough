@@ -4,6 +4,6 @@ type Ret struct {
 }
 
 func (r Ret) execute(ctx *Context) {
-	ctx.Pointer = ctx.ReturnStack[len(ctx.ReturnStack) - 1]
-	ctx.ReturnStack = ctx.ReturnStack[:len(ctx.ReturnStack) - 1]
+	// ret simply jumps to the instruction at the top of the return stack
+	ctx.Pointer = ctx.ReturnStack.Pop()
 }

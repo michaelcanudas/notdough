@@ -3,6 +3,8 @@ package interpreter
 type Add struct {
 }
 
-func (a Add) execute(ctx *Context) {
-	ctx.Stack = append(ctx.Stack[:len(ctx.Stack) - 2], ctx.Stack[len(ctx.Stack) - 1] + ctx.Stack[len(ctx.Stack) - 2])
+func (add Add) execute(ctx *Context) {
+	var a = ctx.ExecutionStack.Pop()
+	var b = ctx.ExecutionStack.Pop()
+	ctx.ExecutionStack.Push(a + b)
 }

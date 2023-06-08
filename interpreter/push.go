@@ -5,5 +5,5 @@ type Push struct {
 }
 
 func (p Push) execute(ctx *Context) {
-	ctx.Stack = append(ctx.Stack, p.Value)
+	ctx.ExecutionStack.Push(p.Value)
 }

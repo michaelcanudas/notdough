@@ -1,10 +1,10 @@
 package interpreter
 
-type Sub struct {
+type Rem struct {
 }
 
-func (s Sub) execute(ctx *Context) {
+func (r Rem) execute(ctx *Context) {
 	var a = ctx.ExecutionStack.Pop()
 	var b = ctx.ExecutionStack.Pop()
-	ctx.ExecutionStack.Push(a - b)
+	ctx.ExecutionStack.Push(a % b)
 }

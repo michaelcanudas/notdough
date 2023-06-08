@@ -1,10 +1,10 @@
 package interpreter
 
-type Sub struct {
+type Div struct {
 }
 
-func (s Sub) execute(ctx *Context) {
+func (d Div) execute(ctx *Context) {
 	var a = ctx.ExecutionStack.Pop()
 	var b = ctx.ExecutionStack.Pop()
-	ctx.ExecutionStack.Push(a - b)
+	ctx.ExecutionStack.Push(a / b)
 }

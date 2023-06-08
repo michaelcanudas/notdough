@@ -14,5 +14,7 @@
 # cont         : Continues from last loop
 # ret          : Returns from last function
 
-push 100
+read
+read
+add
 print

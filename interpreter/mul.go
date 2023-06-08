@@ -4,5 +4,7 @@ type Mul struct {
 }
 
 func (m Mul) execute(ctx *Context) {
-	ctx.Stack = append(ctx.Stack[:len(ctx.Stack) - 2], ctx.Stack[len(ctx.Stack) - 1] * ctx.Stack[len(ctx.Stack) - 2])
+	var a = ctx.ExecutionStack.Pop()
+	var b = ctx.ExecutionStack.Pop()
+	ctx.ExecutionStack.Push(a * b)
 }
