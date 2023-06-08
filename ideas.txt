@@ -1,0 +1,20 @@
+local variables
+- very important
+- works by:
+  - push/pop into variables (ie push VAR, pop VAR)
+  - we keep a stack of stackframes (variable maps (map[string]int64))
+  - stack frames are pushed/popped with function calls
+
+indirect function calls
+- some loadfn instruction
+- some callfn instruction
+
+bitwise & logical and/or/xor/not
+negate (neg)
+bit shift left/right (maybe shl/shr ?)
+
+far down the road ;)
+- different data types (float64, float32, int32 should be all we need (or maybe uints too?) )
+- straight memory access via load/store (would allow for pointers)
+- structs
+- native imports
