@@ -1,0 +1,39 @@
+func FIB # (count)
+    store COUNT
+    push 0
+    store A
+    push 1
+    store B
+    
+    load A
+    print
+    load B
+    print
+
+    loop
+        load A
+        load B
+        add
+        load B
+        store A
+        dup
+        store B
+        print
+        
+        load COUNT
+        dec
+        dup
+        store COUNT
+        push 0
+        cmp <
+        if
+            cont
+        endif
+    endloop
+endfunc
+
+read 
+FIB
+# -1 == DONE
+push -1
+print

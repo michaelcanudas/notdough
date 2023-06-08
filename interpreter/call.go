@@ -1,6 +1,9 @@
 package interpreter
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 type Call struct {
 	Identifier string
@@ -12,7 +15,7 @@ func (c Call) execute(ctx *Context) {
 
 	val, ok := ctx.FuncMap[c.Identifier]
 	if !ok {
-		panic(errors.New("unknown function"))
+		panic(errors.New(fmt.Sprintf("unknown function %s", c.Identifier)))
 	}
 
 	ctx.Pointer = val

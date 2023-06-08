@@ -5,5 +5,5 @@ type Store struct {
 }
 
 func (s Store) execute(ctx *Context) {
-	ctx.LocalStack[len(ctx.LocalStack)-1][s.Identifier] = ctx.ExecutionStack.Pop()
+	ctx.LocalStack.Peek()[s.Identifier] = ctx.ExecutionStack.Pop()
 }

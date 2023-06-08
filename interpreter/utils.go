@@ -15,6 +15,13 @@ func (stack *Stack[T]) Pop() T {
 	return result
 }
 
+// Peek returns the topmost element of a stack without removing it.
+func (stack *Stack[T]) Peek() T {
+	var index = len(*stack) - 1
+	var result = (*stack)[index]
+	return result
+}
+
 func FindEndif(ctx *Context) int64 {
 	loc := ctx.Pointer
 	depth := 1

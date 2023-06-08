@@ -7,7 +7,7 @@ type Load struct {
 }
 
 func (l Load) execute(ctx *Context) {
-	val, ok := ctx.LocalStack[len(ctx.LocalStack)-1][l.Identifier]
+	val, ok := ctx.LocalStack.Peek()[l.Identifier]
 	if !ok {
 		panic(errors.New("unknown identifier"))
 	}

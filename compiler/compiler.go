@@ -14,10 +14,8 @@ func Compile(text string) []interpreter.Instruction {
 
 	var instructions []interpreter.Instruction
 	for i := 0; i < len(lines); i++ {
-		if len(lines[i]) == 0 {
-			continue
-		}
-		if strings.Trim(lines[i], " ")[0] == '#' {
+		trimmed := strings.Trim(lines[i], " ")
+		if len(trimmed) == 0 || trimmed[0] == '#' {
 			continue
 		}
 
@@ -76,6 +74,10 @@ func Compile(text string) []interpreter.Instruction {
 			instructions = append(instructions, interpreter.Endfunc{})
 		case "ret":
 			instructions = append(instructions, interpreter.Ret{})
+		case "dec":
+			instructions = append(instructions, interpreter.Dec{})
+		case "inc":
+			instructions = append(instructions, interpreter.Inc{})
 		case "cmp":
 			instructions = append(instructions, interpreter.Cmp{
 				Comparison: fields[1],
