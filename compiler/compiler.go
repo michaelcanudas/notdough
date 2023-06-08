@@ -1,14 +1,15 @@
 package compiler
 
 import (
-	"strings"
 	"strconv"
+	"strings"
+
 	"michaelcanudas.dough/interpreter"
 )
 
 func Compile(text string) []interpreter.Instruction {
 	lines := strings.Split(text, "\n")
-	
+
 	var instructions []interpreter.Instruction
 	for i := 0; i < len(lines); i++ {
 		if len(lines[i]) == 0 {
@@ -17,10 +18,15 @@ func Compile(text string) []interpreter.Instruction {
 		if strings.Trim(lines[i], " ")[0] == '#' {
 			continue
 		}
-		
+
 		fields := strings.Fields(lines[i])
+
+		if len(fields) == 0 {
+			continue
+		}
+
 		term := fields[0]
-		
+
 		switch term {
 		case "push":
 			value, _ := strconv.ParseInt(fields[1], 10, 64)
@@ -64,6 +70,6 @@ func Compile(text string) []interpreter.Instruction {
 			})
 		}
 	}
-	
+
 	return instructions
 }
