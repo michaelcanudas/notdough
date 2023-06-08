@@ -11,6 +11,17 @@ indirect function calls
 
 bitwise operators and shifts
 
+if we add different data types (or even without them) we could likely
+allow a language to implement structs if we add offsets to load/store
+
+consideration: when stack-based il is compiled to assembly, the "execution stack" no longer exists and is replaced
+with registers. Being that we currently pass arguments & return values via the exeuction stack, that would mean
+passing them through registers. this is okay, but might be limiting in cases with >4 parameters/return values. The
+alternative would be to pass arguments through the variable stack (like .NET does), and make local accesses use 'load'
+and 'store' along with the argument names as opposed to them starting on the execution stack. This would also mean
+funcs would have to declare arguments (which isn't a bad thing?) We probably only need to do this for parameters,
+not return values. Thanks for coming to my ted talk
+
 far down the road ;)
 - different data types (float64, float32, int32 should be all we need (or maybe uints too?) )
 - straight memory access via load/store (would allow for pointers)
