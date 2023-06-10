@@ -17,7 +17,23 @@ func Compile(text string, instructionProviders interpreter.InstructionProviderMa
 			continue
 		}
 
-		fields := strings.Fields(lines[i])
+		line := lines[i]
+
+		// we probably want to support multiple quoted strings per line, but this is easier :P
+		// treat the characters between the first and last quote in the string as one field
+		start := strings.Index(line, "\"")
+		end := strings.LastIndex(line, "\"")
+
+		var fields []string
+		if start != -1 && end != -1 {
+			beforeQuotes := strings.Fields(line[:start])
+			afterQuotes := strings.Fields(line[end+1:])
+			quotes := line[start : end+1]
+
+			fields = append(append(beforeQuotes, quotes), afterQuotes[:]...)
+		} else {
+			fields = strings.Fields(line)
+		}
 
 		if len(fields) == 0 {
 			continue

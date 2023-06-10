@@ -1,6 +1,9 @@
 package interpreter
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 type Load struct {
 	Identifier string
@@ -17,7 +20,11 @@ func init() {
 func (l Load) execute(ctx *Context) {
 	val, ok := ctx.LocalStack.Peek()[l.Identifier]
 	if !ok {
-		panic(errors.New("unknown identifier"))
+		val, ok = ctx.FuncMap[l.Identifier]
+
+		if !ok {
+			panic(errors.New(fmt.Sprintf("unknown identifier %v", l.Identifier)))
+		}
 	}
 
 	ctx.ExecutionStack.Push(val)

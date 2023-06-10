@@ -11,9 +11,9 @@ func Interpret(instructions []Instruction) {
 	}
 
 	for i := 0; i < len(context.Instructions); i++ {
-		var f, ok = context.Instructions[i].(Func)
+		instruction, ok := context.Instructions[i].(NamedInstruction)
 		if ok {
-			context.FuncMap[f.Identifier] = int64(i)
+			context.FuncMap[instruction.getName()] = int64(i)
 		}
 	}
 

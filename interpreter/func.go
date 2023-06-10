@@ -17,3 +17,7 @@ func (f Func) execute(ctx *Context) {
 	// instruction (so that they are not executed until they are called)
 	ctx.Pointer = FindEndfunc(ctx)
 }
+
+func (f Func) getName() string {
+	return f.Identifier
+}
