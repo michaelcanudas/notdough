@@ -1,0 +1,7 @@
+func PRINT69
+    push 64
+    print
+endfunc
+
+load PRINT69
+call
