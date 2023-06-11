@@ -4,6 +4,14 @@ type And struct {
 	Bitwise bool
 }
 
+func init() {
+	RegisterInstruction("and", func(fields []string) Instruction {
+		return And{
+			Bitwise: HasBitwiseModifier(fields),
+		}
+	})
+}
+
 func (and And) execute(ctx *Context) {
 	var a = ctx.ExecutionStack.Pop()
 	var b = ctx.ExecutionStack.Pop()

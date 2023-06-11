@@ -11,9 +11,9 @@ func Interpret(instructions []Instruction) {
 	}
 
 	for i := 0; i < len(context.Instructions); i++ {
-		var f, ok = context.Instructions[i].(Func)
+		instruction, ok := context.Instructions[i].(NamedInstruction)
 		if ok {
-			context.FuncMap[f.Identifier] = int64(i)
+			context.FuncMap[instruction.getName()] = int64(i)
 		}
 	}
 
@@ -21,4 +21,16 @@ func Interpret(instructions []Instruction) {
 		context.Instructions[context.Pointer].execute(&context)
 		context.Pointer++
 	}
+}
+
+type InstructionProviderMap map[string]func(fields []string) Instruction
+
+var RegisteredInstructionProviders InstructionProviderMap
+
+func RegisterInstruction(name string, createInstruction func(fields []string) Instruction) {
+	if RegisteredInstructionProviders == nil {
+		RegisteredInstructionProviders = make(InstructionProviderMap)
+	}
+
+	RegisteredInstructionProviders[name] = createInstruction
 }

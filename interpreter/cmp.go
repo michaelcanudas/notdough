@@ -6,6 +6,13 @@ type Cmp struct {
 	Comparison string
 }
 
+func init() {
+	RegisterInstruction("cmp", func(fields []string) Instruction {
+		return Cmp{
+			Comparison: fields[1],
+		}
+	})
+}
 func (c Cmp) execute(ctx *Context) {
 	// pop operands off execution stack
 	var a = ctx.ExecutionStack.Pop()

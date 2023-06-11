@@ -4,6 +4,10 @@ type Instruction interface {
 	execute(*Context)
 }
 
+type NamedInstruction interface {
+	getName() string
+}
+
 type Context struct {
 	// when we add variables:
 	// push a map on function call

@@ -22,6 +22,11 @@ func (stack *Stack[T]) Peek() T {
 	return result
 }
 
+func HasBitwiseModifier(fields []string) bool {
+	const bitwiseKeyword string = "bits" // should this be "bitwise" instead ?
+	return len(fields) >= 2 && fields[1] == bitwiseKeyword
+}
+
 func FindEndif(ctx *Context) int64 {
 	loc := ctx.Pointer
 	depth := 1
