@@ -2,7 +2,7 @@ package tests
 
 import "fmt"
 
-var registeredTests map[string]func() = make(map[string]func())
+var registeredTests = make(map[string]func())
 
 func RegisterTest(name string, testFunc func()) {
 	registeredTests[name] = testFunc
@@ -38,6 +38,8 @@ func InvokeAllTests() {
 	for name, _ := range registeredTests {
 		results[name] = InvokeTest(name)
 	}
+
+	fmt.Println("======================================")
 
 	passedCount := 0
 	for name, passed := range results {

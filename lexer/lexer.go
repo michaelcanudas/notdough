@@ -100,33 +100,6 @@ func Lex(src string) []string {
 	return tokens
 }
 
-func init() {
-	tests.RegisterTest("lexer", func() {
-		txt := `import system
-
-		let main = void() {
-		loop(10, void() {
-		system.print("hello!")
-		})
-		}
-
-		let loop = void(x: int, fn: void()) {
-		if x <= 0 {
-		return
-		}
-
-		fn()
-		loop(x - 1, fn)
-		}`
-		lexed := Lex(txt)
-
-		for _, l := range lexed {
-			fmt.Println("_" + l + "_")
-		}
-
-	})
-}
-
 func isIdentifierChar(char byte) bool {
 	return ('a' <= char && char <= 'z') || ('A' <= char && char <= 'Z') || ('0' <= char && char <= '9')
 }
