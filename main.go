@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"michaelcanudas.dough/tests"
 	"os"
 	"path"
 
@@ -10,6 +11,15 @@ import (
 )
 
 func main() {
+	if len(os.Args) >= 3 && os.Args[1] == "-t" {
+		if os.Args[2] == "--all" {
+			tests.InvokeAllTests()
+		} else {
+			tests.InvokeTest(os.Args[2])
+		}
+		return
+	}
+
 	var file string
 	if len(os.Args) >= 2 {
 		file = os.Args[1]
