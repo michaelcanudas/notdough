@@ -1,7 +1,5 @@
 package parser
 
-import "strconv"
-
 type ExpressionNode interface {
 
 }
@@ -34,7 +32,7 @@ func Term() Parser[ExpressionNode] {
 
 func Factor() Parser[ExpressionNode] {
 	return func(input []string) (ExpressionNode, []string, bool) {
-		return Either(Number(), func(input []string) (ExpressionNode, []string, bool) {
+		return Either[ExpressionNode](Number(), func(input []string) (ExpressionNode, []string, bool) {
 			_, rest, ok := String("(")(input)
 			if !ok {
 				return nil, input, ok

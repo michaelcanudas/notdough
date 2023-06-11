@@ -6,7 +6,7 @@ type BinaryExpressionNode struct {
 	Rhs ExpressionNode
 }
 
-func Add(lhs int) Parser[BinaryExpressionNode] {
+func Add(lhs ExpressionNode) Parser[BinaryExpressionNode] {
 	return func(input []string) (BinaryExpressionNode, []string, bool) {
 		op, rest, ok := String("+")(input)
 		if !ok {
@@ -26,7 +26,7 @@ func Add(lhs int) Parser[BinaryExpressionNode] {
 	}
 }
 
-func Sub(lhs int) Parser[BinaryExpressionNode] {
+func Sub(lhs ExpressionNode) Parser[BinaryExpressionNode] {
 	return func(input []string) (BinaryExpressionNode, []string, bool) {
 		op, rest, ok := String("-")(input)
 		if !ok {
@@ -46,7 +46,7 @@ func Sub(lhs int) Parser[BinaryExpressionNode] {
 	}
 }
 
-func Mul(lhs int) Parser[BinaryExpressionNode] {
+func Mul(lhs ExpressionNode) Parser[BinaryExpressionNode] {
 	return func(input []string) (BinaryExpressionNode, []string, bool) {
 		op, rest, ok := String("*")(input)
 		if !ok {
@@ -61,12 +61,12 @@ func Mul(lhs int) Parser[BinaryExpressionNode] {
 		return BinaryExpressionNode {
 			Op: op,
 			Lhs: lhs,
-			Rhs: term,
+			Rhs: factor,
 		}, rest, ok
 	}
 }
 
-func Div(lhs int) Parser[BinaryExpressionNode] {
+func Div(lhs ExpressionNode) Parser[BinaryExpressionNode] {
 	return func(input []string) (BinaryExpressionNode, []string, bool) {
 		op, rest, ok := String("/")(input)
 		if !ok {
@@ -81,7 +81,7 @@ func Div(lhs int) Parser[BinaryExpressionNode] {
 		return BinaryExpressionNode {
 			Op: op,
 			Lhs: lhs,
-			Rhs: term,
+			Rhs: factor,
 		}, rest, ok
 	}
 }
