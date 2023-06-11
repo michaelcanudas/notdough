@@ -1,5 +1,9 @@
 package parser
 
+type DefinitionNode struct {
+	Identifier string
+}
+
 func Definition() Parser[DefinitionNode] {
 	return func(input []string) (DefinitionNode, []string, bool) {
 		node := DefinitionNode{}
@@ -18,8 +22,4 @@ func Definition() Parser[DefinitionNode] {
 			Identifier: identifier,
 		}, rest, ok
 	}
-}
-
-type DefinitionNode struct {
-	Identifier string
 }

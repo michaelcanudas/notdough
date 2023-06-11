@@ -1,9 +1,10 @@
-package compiler
+package lexer
 
 import (
 	"fmt"
-	"michaelcanudas.dough/tests"
 	"strings"
+
+	"michaelcanudas.dough/tests"
 )
 
 var knownTokens = []string{
