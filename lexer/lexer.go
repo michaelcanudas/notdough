@@ -1,10 +1,7 @@
 package lexer
 
 import (
-	"fmt"
 	"strings"
-
-	"michaelcanudas.dough/tests"
 )
 
 var knownTokens = []string{
