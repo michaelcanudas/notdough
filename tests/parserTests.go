@@ -7,14 +7,14 @@ import (
 
 func init() {
 	RegisterTest("parser.main", func() {
-		input := []String {
+		input := []string{
 			"let",
 			"x",
 		}
 		node, rest, ok := parser.Definition()(input)
-		
+
 		fmt.Println(node)
 		fmt.Println(rest)
-		fmt.println(ok)
+		fmt.Println(ok)
 	})
 }
