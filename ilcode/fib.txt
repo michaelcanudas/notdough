@@ -4,6 +4,7 @@ func FIB # (count)
     store A
     push 1
     store B
+
     load COUNT
     push 0
     cmp ==
@@ -54,5 +55,5 @@ func FIB # (count)
     endloop
 endfunc
 
-read 
+read
 FIB
