@@ -1,8 +1,6 @@
 package compiler
 
 import (
-	"fmt"
-	"michaelcanudas.dough/tests"
 	"strings"
 )
 
@@ -97,33 +95,6 @@ func Lex(src string) []string {
 	tokens = append(tokens, strings.Trim(src[currentTok:currentPos], " "))
 
 	return tokens
-}
-
-func init() {
-	tests.RegisterTest("lexer", func() {
-		txt := `import system
-
-		let main = void() {
-		loop(10, void() {
-		system.print("hello!")
-		})
-		}
-
-		let loop = void(x: int, fn: void()) {
-		if x <= 0 {
-		return
-		}
-
-		fn()
-		loop(x - 1, fn)
-		}`
-		lexed := Lex(txt)
-
-		for _, l := range lexed {
-			fmt.Println("_" + l + "_")
-		}
-
-	})
 }
 
 func isIdentifierChar(char byte) bool {
