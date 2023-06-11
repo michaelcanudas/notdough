@@ -32,7 +32,7 @@ func main() {
 	input, err := os.ReadFile(file)
 
 	if err != nil {
-		input, err = os.ReadFile(path.Join("ilcode/", file))
+		input, err = os.ReadFile(path.Join("notes/il/", file))
 
 		if err != nil {
 			panic(fmt.Sprintf("unable to read code file '%s'!!", file))
