@@ -1,13 +1,17 @@
 package interpreter
 
+import (
+	"michaelcanudas.dough/ast"
+)
+
 type Xor struct {
 	Bitwise bool
 }
 
 func init() {
-	RegisterInstruction("xor", func(fields []string) Instruction {
+	RegisterInstruction("xor", func(arg ast.Node) Instruction {
 		return Xor{
-			Bitwise: HasBitwiseModifier(fields),
+			Bitwise: HasBitwiseModifier(arg),
 		}
 	})
 }

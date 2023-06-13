@@ -1,52 +1,52 @@
-func FIB # (count)
-    store COUNT
+func $FIB
+    store $COUNT
     push 0
-    store A
+    store $A
     push 1
-    store B
+    store $B
 
-    load COUNT
+    load $COUNT
     push 0
     cmp ==
     if
         ret
     endif
 
-    load COUNT
+    load $COUNT
     dec
-    store COUNT
+    store $COUNT
 
-    load A
+    load $A
     print
 
-    load COUNT
+    load $COUNT
     push 0
     cmp ==
     if
         ret
     endif
 
-    load COUNT
+    load $COUNT
     dec
-    store COUNT
+    store $COUNT
 
-    load B
+    load $B
     print
 
     loop
-        load A
-        load B
+        load $A
+        load $B
         add
-        load B
-        store A
+        load $B
+        store $A
         dup
-        store B
+        store $B
         print
         
-        load COUNT
+        load $COUNT
         dec
         dup
-        store COUNT
+        store $COUNT
         push 0
         cmp <
         if
@@ -56,4 +56,4 @@ func FIB # (count)
 endfunc
 
 read
-FIB
+call $FIB

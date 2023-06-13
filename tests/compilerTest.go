@@ -18,6 +18,13 @@ let x = {
 }
 let y = 25
 print (x + y) + 5
+
+	1 + 2
+	il {
+		push 4
+		mul
+		print
+	}
 }
 `
 

@@ -1,10 +1,14 @@
 package interpreter
 
+import (
+	"michaelcanudas.dough/ast"
+)
+
 type Endif struct {
 }
 
 func init() {
-	RegisterInstruction("endif", func(fields []string) Instruction {
+	RegisterInstruction("endif", func(arg ast.Node) Instruction {
 		return Endif{}
 	})
 }

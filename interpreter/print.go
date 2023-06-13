@@ -1,12 +1,15 @@
 package interpreter
 
-import "fmt"
+import (
+	"fmt"
+	"michaelcanudas.dough/ast"
+)
 
 type Print struct {
 }
 
 func init() {
-	RegisterInstruction("print", func(fields []string) Instruction {
+	RegisterInstruction("print", func(arg ast.Node) Instruction {
 		return Print{}
 	})
 }

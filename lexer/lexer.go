@@ -92,7 +92,15 @@ func Lex(src string) []string {
 		currentPos++
 	}
 
-	tokens = append(tokens, strings.Trim(src[currentTok:currentPos], " "))
+	last := src[currentTok:currentPos]
+	last = strings.Trim(last, " ")
+	last = strings.Trim(last, "\r")
+	last = strings.Trim(last, "\n")
+	last = strings.Trim(last, "\t")
+
+	if len(last) > 0{
+		tokens = append(tokens, last)
+	}
 
 	return tokens
 }

@@ -1,10 +1,14 @@
 package interpreter
 
+import (
+	"michaelcanudas.dough/ast"
+)
+
 type Ret struct {
 }
 
 func init() {
-	RegisterInstruction("ret", func(fields []string) Instruction {
+	RegisterInstruction("ret", func(arg ast.Node) Instruction {
 		return Ret{}
 	})
 }

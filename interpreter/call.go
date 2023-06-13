@@ -3,6 +3,7 @@ package interpreter
 import (
 	"errors"
 	"fmt"
+	"michaelcanudas.dough/ast"
 )
 
 type Call struct {
@@ -10,22 +11,17 @@ type Call struct {
 }
 
 func init() {
-	RegisterInstruction("call", func(fields []string) Instruction {
+	RegisterInstruction("call", func(arg ast.Node) Instruction {
 		var identifier string
 
-		if len(fields) > 1 {
-			identifier = fields[1]
-		} else {
+		if arg == nil {
 			identifier = ""
+		} else {
+			identifier = arg.(ast.IlVariableNode).VarName.Value
 		}
 
 		return Call{
 			Identifier: identifier,
-		}
-	})
-	RegisterInstruction("", func(fields []string) Instruction {
-		return Call{
-			Identifier: fields[0],
 		}
 	})
 }

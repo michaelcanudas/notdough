@@ -1,10 +1,14 @@
 package interpreter
 
+import (
+	"michaelcanudas.dough/ast"
+)
+
 type Sub struct {
 }
 
 func init() {
-	RegisterInstruction("sub", func(fields []string) Instruction {
+	RegisterInstruction("sub", func(arg ast.Node) Instruction {
 		return Sub{}
 	})
 }

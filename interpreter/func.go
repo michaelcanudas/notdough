@@ -1,13 +1,17 @@
 package interpreter
 
+import (
+	"michaelcanudas.dough/ast"
+)
+
 type Func struct {
 	Identifier string
 }
 
 func init() {
-	RegisterInstruction("func", func(fields []string) Instruction {
+	RegisterInstruction("func", func(arg ast.Node) Instruction {
 		return Func{
-			Identifier: fields[1],
+			Identifier: arg.(ast.IlVariableNode).VarName.Value,
 		}
 	})
 }

@@ -2,6 +2,7 @@ package interpreter
 
 import (
 	"fmt"
+	"michaelcanudas.dough/ast"
 	"strconv"
 )
 
@@ -9,7 +10,7 @@ type Read struct {
 }
 
 func init() {
-	RegisterInstruction("read", func(fields []string) Instruction {
+	RegisterInstruction("read", func(arg ast.Node) Instruction {
 		return Read{}
 	})
 }

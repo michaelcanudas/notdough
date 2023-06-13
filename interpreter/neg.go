@@ -1,10 +1,14 @@
 package interpreter
 
+import (
+	"michaelcanudas.dough/ast"
+)
+
 type Neg struct {
 }
 
 func init() {
-	RegisterInstruction("neg", func(fields []string) Instruction {
+	RegisterInstruction("neg", func(arg ast.Node) Instruction {
 		return Neg{}
 	})
 }

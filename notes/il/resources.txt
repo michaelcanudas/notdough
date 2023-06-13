@@ -1,4 +1,8 @@
-rsrc STRING "HELLO WORLD!!!!! i am patapizza\n\n\nWHAT NO YOU ARE NOT"
+rsrc $hello
+utf8 ""
+byte 0
+b64
+endrsrc
 
 load STRING
 printstr

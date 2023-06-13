@@ -1,19 +1,19 @@
-func abs
-    store x
+func $abs
+    store $x
 
-    load x
+    load $x
     push 0
     cmp >
 
     if
-        load x
+        load $x
         neg
         ret
     endif
 
-    load x
+    load $x
 endfunc
 
 read 
-abs
+call $abs
 print

@@ -1,10 +1,14 @@
 package interpreter
 
+import (
+	"michaelcanudas.dough/ast"
+)
+
 type Mul struct {
 }
 
 func init() {
-	RegisterInstruction("mul", func(fields []string) Instruction {
+	RegisterInstruction("mul", func(arg ast.Node) Instruction {
 		return Mul{}
 	})
 }

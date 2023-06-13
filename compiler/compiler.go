@@ -21,6 +21,8 @@ func Compile(node ast.Node) []interpreter.Instruction {
 		return print(node.(ast.PrintNode))
 	case ast.ReturnNode:
 		return ret(node.(ast.ReturnNode))
+	case ast.IlExpression:
+		return ilexpr(node.(ast.IlExpression))
 	default:
 		return nil
 	}

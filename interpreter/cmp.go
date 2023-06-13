@@ -1,15 +1,18 @@
 package interpreter
 
-import "fmt"
+import (
+	"fmt"
+	"michaelcanudas.dough/ast"
+)
 
 type Cmp struct {
 	Comparison string
 }
 
 func init() {
-	RegisterInstruction("cmp", func(fields []string) Instruction {
+	RegisterInstruction("cmp", func(arg ast.Node) Instruction {
 		return Cmp{
-			Comparison: fields[1],
+			Comparison: arg.(ast.SymbolNode).Value,
 		}
 	})
 }

@@ -1,25 +1,14 @@
 package interpreter
 
 import (
+	"michaelcanudas.dough/ast"
 	"strings"
 )
 
 func init() {
-	RegisterInstruction("rsrc", func(fields []string) Instruction {
-		var content ResourceContent
-
-		if strings.HasPrefix(fields[2], "\"") {
-			// string content
-			content = StringResourceContent{
-				Value: unescape(fields[2]),
-			}
-		} else {
-			panic("error parsing resource contents")
-		}
-
+	RegisterInstruction("rsrc", func(arg ast.Node) Instruction {
 		return Rsrc{
-			Name:    fields[1],
-			Content: content,
+			Name: arg.(ast.IdentifierNode).Value,
 		}
 	})
 }
@@ -33,7 +22,6 @@ func unescape(s string) string {
 
 type Rsrc struct {
 	Name    string
-	Content ResourceContent
 }
 
 func (r Rsrc) execute(ctx *Context) {
@@ -42,16 +30,4 @@ func (r Rsrc) execute(ctx *Context) {
 
 func (r Rsrc) getName() string {
 	return r.Name
-}
-
-type ResourceContent interface {
-	getData() []byte
-}
-
-type StringResourceContent struct {
-	Value string
-}
-
-func (s StringResourceContent) getData() []byte {
-	return []byte(s.Value)
 }
