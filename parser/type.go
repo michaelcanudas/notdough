@@ -17,6 +17,6 @@ func typ() Parser[ast.Node] {
 			return ast.TypeNode{
 				Value: value.(ast.KeywordNode),
 				}, rest, ok
-		}, identifier())(input)
+		}, additive())(input)
 	}
 }

@@ -1,14 +1,15 @@
 package parser
 
-import "michaelcanudas.dough/ast"
+import (
+	"michaelcanudas.dough/ast"
+)
 
-func parenthesis() Parser[ast.Node] {
+func print() Parser[ast.Node] {
 	return func(input []string) (ast.Node, []string, bool) {
 		return either(func(input []string) (ast.Node, []string, bool) {
 			parsers := []Parser[ast.Node] {
-				symbol("("),
+				keyword("print"),
 				expression(),
-				symbol(")"),
 			}
 			
 			nodes, rest, ok := sequence(parsers...)(input)
@@ -16,7 +17,10 @@ func parenthesis() Parser[ast.Node] {
 				return nil, input, ok
 			}
 			
-			return nodes[1], rest, ok
-		}, identifier())(input)
+			return ast.PrintNode{
+				Keyword: nodes[0].(ast.KeywordNode),
+				Value: nodes[1],
+			}, rest, ok
+		}, ret())(input)
 	}
 }

@@ -22,6 +22,6 @@ func identifier() Parser[ast.Node] {
 			return ast.IdentifierNode{
 				Value: input[0],
 			}, input[1:], match
-		}, additive())(input)
+		}, number())(input)
 	}
 }
