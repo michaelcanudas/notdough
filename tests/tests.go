@@ -17,10 +17,10 @@ func InvokeTest(name string) bool {
 
 	var passed bool
 	defer func() {
-		//if err := recover(); err != nil {
-	//		fmt.Println(err)
-	//		passed = false
-		//}
+		if err := recover(); err != nil {
+			fmt.Println(err)
+			passed = false
+		}
 	}()
 
 	test()

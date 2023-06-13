@@ -1,7 +1,6 @@
 package parser
 
 import (
-	"fmt"
 	"michaelcanudas.dough/ast"
 )
 
@@ -81,7 +80,6 @@ func ilExpression() Parser[ast.Node] {
 			return nil, input, false
 		}
 
-		fmt.Println(rest)
 		insts, rest, _ := many(instruction())(rest)
 
 		instructions := []ast.IlInstructionNode{}
