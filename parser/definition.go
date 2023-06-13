@@ -1,25 +1,34 @@
 package parser
 
-type DefinitionNode struct {
-	Identifier string
-}
+import "michaelcanudas.dough/ast"
 
-func Definition() Parser[DefinitionNode] {
-	return func(input []string) (DefinitionNode, []string, bool) {
-		node := DefinitionNode{}
-		
-		_, rest, ok := String("let")(input)
-		if !ok {
-			return node, input, ok
-		}
-		
-		identifier, rest, ok := Identifier()(rest)
-		if !ok {
-			return node, input, ok
-		}
-		
-		return DefinitionNode{
-			Identifier: identifier,
-		}, rest, ok
+func definition() Parser[ast.Node] {
+	return func(input []string) (ast.Node, []string, bool) {
+		return either(func(input []string) (ast.Node, []string, bool) {
+			parsers := []Parser[ast.Node] {
+				keyword("let"),
+				identifier(),
+				optional(annotation()),
+				symbol("="),
+				expression(),
+			}
+
+			nodes, rest, ok := sequence(parsers...)(input)
+			if !ok {
+				return nil, input, ok
+			}
+
+			if nodes[2] == nil {
+				nodes[2] = ast.TypeNode{}
+			}
+
+			return ast.DefinitionNode{
+				Keyword: nodes[0].(ast.KeywordNode),
+				Identifier: nodes[1].(ast.IdentifierNode),
+				Type: nodes[2].(ast.TypeNode),
+				Assignment: nodes[3].(ast.SymbolNode),
+				Value: nodes[4],
+				}, rest, ok
+		}, ret())(input)
 	}
 }

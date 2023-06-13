@@ -1,87 +1,25 @@
 package parser
 
-type BinaryExpressionNode struct {
-	Op string
-	Lhs ExpressionNode
-	Rhs ExpressionNode
-}
+import "michaelcanudas.dough/ast"
 
-func Add(lhs ExpressionNode) Parser[BinaryExpressionNode] {
-	return func(input []string) (BinaryExpressionNode, []string, bool) {
-		op, rest, ok := String("+")(input)
-		if !ok {
-			return BinaryExpressionNode{}, input, ok
+func binary(operator string, next Parser[ast.Node]) func(node ast.Node) Parser[ast.Node] {
+	return func(lhs ast.Node) Parser[ast.Node] {
+		return func(input []string) (ast.Node, []string, bool) {
+			parsers := []Parser[ast.Node] {
+				symbol(operator),
+				next,
+			}
+
+			nodes, rest, ok := sequence(parsers...)(input)
+			if !ok {
+				return nil, input, ok
+			}
+
+			return ast.BinaryNode{
+				Op: nodes[0].(ast.SymbolNode),
+				Lhs: lhs,
+				Rhs: nodes[1],
+			}, rest, ok
 		}
-
-		term, rest, ok := Term()(rest)
-		if !ok {
-			return BinaryExpressionNode{}, input, ok
-		}
-
-		return BinaryExpressionNode {
-			Op: op,
-			Lhs: lhs,
-			Rhs: term,
-		}, rest, ok
-	}
-}
-
-func Sub(lhs ExpressionNode) Parser[BinaryExpressionNode] {
-	return func(input []string) (BinaryExpressionNode, []string, bool) {
-		op, rest, ok := String("-")(input)
-		if !ok {
-			return BinaryExpressionNode{}, input, ok
-		}
-
-		term, rest, ok := Term()(rest)
-		if !ok {
-			return BinaryExpressionNode{}, input, ok
-		}
-
-		return BinaryExpressionNode {
-			Op: op,
-			Lhs: lhs,
-			Rhs: term,
-		}, rest, ok
-	}
-}
-
-func Mul(lhs ExpressionNode) Parser[BinaryExpressionNode] {
-	return func(input []string) (BinaryExpressionNode, []string, bool) {
-		op, rest, ok := String("*")(input)
-		if !ok {
-			return BinaryExpressionNode{}, input, ok
-		}
-
-		factor, rest, ok := Factor()(rest)
-		if !ok {
-			return BinaryExpressionNode{}, input, ok
-		}
-
-		return BinaryExpressionNode {
-			Op: op,
-			Lhs: lhs,
-			Rhs: factor,
-		}, rest, ok
-	}
-}
-
-func Div(lhs ExpressionNode) Parser[BinaryExpressionNode] {
-	return func(input []string) (BinaryExpressionNode, []string, bool) {
-		op, rest, ok := String("/")(input)
-		if !ok {
-			return BinaryExpressionNode{}, input, ok
-		}
-
-		factor, rest, ok := Factor()(rest)
-		if !ok {
-			return BinaryExpressionNode{}, input, ok
-		}
-
-		return BinaryExpressionNode {
-			Op: op,
-			Lhs: lhs,
-			Rhs: factor,
-		}, rest, ok
 	}
 }

@@ -1,6 +1,6 @@
 package parser
 
-func Many[T any](parser Parser[T]) Parser[[]T] {
+func many[T any](parser Parser[T]) Parser[[]T] {
 	return func(input []string) ([]T, []string, bool) {
 		next := input
 		

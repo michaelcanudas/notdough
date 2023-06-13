@@ -1,6 +1,6 @@
 package parser
 
-func String(content string) Parser[string] {
+func str(content string) Parser[string] {
 	return func(input []string) (string, []string, bool) {
 		if len(input) == 0 {
 			return "", input, false

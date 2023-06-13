@@ -1,6 +1,6 @@
 package parser
 
-func Either[T any](parsers ...Parser[T]) Parser[T] {
+func either[T any](parsers ...Parser[T]) Parser[T] {
 	return func(input []string) (T, []string, bool) {
 		for i := 0; i < len(parsers); i++ {
 			result, rest, ok := parsers[i](input)

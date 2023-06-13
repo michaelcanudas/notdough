@@ -1,11 +1,11 @@
 package parser
 
-func Optional[T any](parser Parser[T]) Parser[T] {
+func optional[T any](parser Parser[T]) Parser[T] {
 	return func(input []string) (T, []string, bool) {
-		result, rest, ok := parser(input)
+		result, rest, occured := parser(input)
 		
-		if ok {
-			return result, rest, ok
+		if occured {
+			return result, rest, true
 		}
 		
 		var defaultT T

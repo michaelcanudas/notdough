@@ -6,7 +6,7 @@ import (
 	"os"
 	"path"
 
-	"michaelcanudas.dough/compiler"
+	"michaelcanudas.dough/ilcompiler"
 	"michaelcanudas.dough/interpreter"
 )
 
@@ -39,5 +39,5 @@ func main() {
 		}
 	}
 
-	interpreter.Interpret(compiler.Compile(string(input), interpreter.RegisteredInstructionProviders))
+	interpreter.Interpret(ilicompiler.Compile(string(input), interpreter.RegisteredInstructionProviders))
 }
