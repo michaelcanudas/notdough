@@ -10,8 +10,20 @@ func multiplicative() Parser[ast.Node] {
 				return nil, input, ok
 			}
 
-			return either(mul(factor), div(factor))(rest)
+			return multiplicativeHelper(factor)(rest)
 		}, parenthesis())(input)
+	}
+}
+
+func multiplicativeHelper(factor ast.Node) Parser[ast.Node] {
+	return func(input []string) (ast.Node, []string, bool) {
+		t, rest, ok := either(mul(factor), div(factor))(input)
+
+		if !ok {
+			return factor, input, true
+		}
+
+		return multiplicativeHelper(t)(rest)
 	}
 }
 
