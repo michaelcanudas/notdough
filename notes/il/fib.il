@@ -1,3 +1,5 @@
+rsrc $DESC text "enter number of digits to print:"
+
 func $FIB
     store $COUNT
     push 0
@@ -55,5 +57,7 @@ func $FIB
     endloop
 endfunc
 
+load $DESC
+printstr
 read
 call $FIB

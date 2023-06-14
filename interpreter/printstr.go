@@ -1,6 +1,7 @@
 package interpreter
 
 import (
+	"fmt"
 	"michaelcanudas.dough/ast"
 )
 
@@ -14,5 +15,7 @@ type Printstr struct {
 }
 
 func (p Printstr) execute(ctx *Context) {
-	_ = ctx.ExecutionStack.Pop()
+	strLocation := ctx.ExecutionStack.Pop()
+	str := ctx.Instructions[strLocation+1].(Text)
+	fmt.Print(str.Value)
 }

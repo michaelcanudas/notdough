@@ -1,4 +1,3 @@
-rsrc $hello "testing!"
-
-load STRING
+rsrc $hello text "ABc"
+load $hello
 printstr

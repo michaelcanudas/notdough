@@ -12,6 +12,8 @@ type InstructionProvider func(node ast.Node)Instruction
 
 var registeredInstructionProviders = make(map[string]InstructionProvider)
 
+
+
 func IlCompileString(src string) []Instruction {
 	return IlCompile(parser.IlParse(lexer.Lex(src)))
 }
