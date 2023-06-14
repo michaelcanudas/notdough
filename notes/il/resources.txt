@@ -1,8 +1,0 @@
-rsrc $hello
-utf8 ""
-byte 0
-b64
-endrsrc
-
-load STRING
-printstr
