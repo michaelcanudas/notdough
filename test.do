@@ -1,25 +1,10 @@
 {
-    il {
-        func $abs
+    let add: int() = {
+        il {
             store $x
-
-            load $x
-            push 0
-            cmp >
-
-            if
-                load $x
-                neg
-                ret
-            endif
-
-            load $x
-        endfunc
+        }
+        return x + 1
     }
 
-    -69
-    print abs()
-
-    let abs: int() {
-    }
+    print add(5)
 }

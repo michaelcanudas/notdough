@@ -16,14 +16,14 @@ func call() Parser[ast.Node] {
 
 func callHelper(term ast.Node) Parser[ast.Node] {
 	return func(input []string) (ast.Node, []string, bool) {
-		_, rest, ok := sequence(symbol("("), symbol(")"))(input)
-
+		params, rest, ok := clown()(input)
 		if !ok {
 			return term, input, true
 		}
 
 		return callHelper(ast.CallNode{
-			Value: term,
+			Value:  term,
+			Params: params,
 		})(rest)
 	}
 }

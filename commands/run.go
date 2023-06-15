@@ -1,6 +1,8 @@
 package commands
 
 import (
+	"fmt"
+	"reflect"
 	"michaelcanudas.dough/compiler"
 	"michaelcanudas.dough/interpreter"
 	"michaelcanudas.dough/lexer"
@@ -26,10 +28,10 @@ func Run(args []string) error {
 	nodes := parser.Parse(tokens)
 	instructions := compiler.Compile(nodes)
 
-	/*for _, instruction := range instructions {
+	for _, instruction := range instructions {
 		fmt.Print(reflect.TypeOf(instruction).Name())
 		fmt.Println(instruction)
-	}*/
+	}
 
 	interpreter.Interpret(instructions)
 

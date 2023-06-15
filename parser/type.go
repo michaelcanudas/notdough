@@ -17,19 +17,20 @@ func typ() Parser[ast.Node] {
 
 func typHelper(term ast.Node) Parser[ast.Node] {
 	return func(input []string) (ast.Node, []string, bool) {
-		_, rest, ok := symbol("(")(input)
+		ts, rest, ok := clown()(input)
 		if !ok {
 			return term, input, true
 		}
 
-		ts, rest, ok := many(typ())(rest)
-		if !ok {
-			return term, input, true
-		}
-
-		_, rest, ok = symbol(")")(rest)
-		if !ok {
-			return term, input, true
+		var argTypes []ast.TypeNode
+		for _, t := range ts {
+			switch t.(type) {
+			case ast.KeywordTypeNode:
+			case ast.FunctionTypeNode:
+				argTypes = append(argTypes, t.(ast.TypeNode))
+			default:
+				return term, input, true
+			}
 		}
 
 		return typHelper(ast.FunctionTypeNode{

@@ -1,5 +1,6 @@
 package ast
 
 type CallNode struct {
-	Value Node
+	Value  Node
+	Params []Node
 }
