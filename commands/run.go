@@ -25,6 +25,12 @@ func Run(args []string) error {
 	tokens := lexer.Lex(input)
 	nodes := parser.Parse(tokens)
 	instructions := compiler.Compile(nodes)
+
+	/*for _, instruction := range instructions {
+		fmt.Print(reflect.TypeOf(instruction).Name())
+		fmt.Println(instruction)
+	}*/
+
 	interpreter.Interpret(instructions)
 
 	return nil

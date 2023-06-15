@@ -1,7 +1,7 @@
 package ast
 
 type BlockNode struct {
-	Open string
-	Value      []Node
+	Open  string
+	Value []Node
 	Close string
 }

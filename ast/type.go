@@ -1,5 +1,10 @@
 package ast
 
-type TypeNode struct {
-	Value KeywordNode
+type KeywordTypeNode struct {
+	Type KeywordNode
+}
+
+type FunctionTypeNode struct {
+	Type     TypeNode
+	ArgTypes []TypeNode
 }

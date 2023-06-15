@@ -14,14 +14,15 @@ func definition() Parser[ast.Node] {
 			return nil, input, ok
 		}
 
-		if nodes[2] == nil {
-			nodes[2] = ast.TypeNode{}
+		t := nodes[2]
+		if t != nil {
+			t = t.(ast.TypeNode)
 		}
 
 		return ast.DefinitionNode{
 			Keyword:    nodes[0].(ast.KeywordNode),
 			Identifier: nodes[1].(ast.IdentifierNode),
-			Type:       nodes[2].(ast.TypeNode),
+			Type:       t,
 			Assignment: nodes[3].(ast.SymbolNode),
 			Value:      nodes[4],
 		}, rest, ok

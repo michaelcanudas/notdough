@@ -11,6 +11,8 @@ func Compile(node ast.Node) []interpreter.Instruction {
 		return binary(node.(ast.BinaryNode))
 	case ast.BlockNode:
 		return block(node.(ast.BlockNode))
+	case ast.CallNode:
+		return call(node.(ast.CallNode))
 	case ast.DefinitionNode:
 		return definition(node.(ast.DefinitionNode))
 	case ast.IdentifierNode:
@@ -21,6 +23,8 @@ func Compile(node ast.Node) []interpreter.Instruction {
 		return print(node.(ast.PrintNode))
 	case ast.ReturnNode:
 		return ret(node.(ast.ReturnNode))
+	case ast.UnaryNode:
+		return unary(node.(ast.UnaryNode))
 	case ast.IlExpression:
 		return ilexpr(node.(ast.IlExpression))
 	default:

@@ -1,7 +1,7 @@
 package ast
 
 type IlInstructionNode struct {
-	OpCode IdentifierNode
+	OpCode   IdentifierNode
 	Argument Node // may be nil
 }
 

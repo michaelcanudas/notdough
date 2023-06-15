@@ -4,7 +4,9 @@ import "michaelcanudas.dough/ast"
 
 func block() Parser[ast.Node] {
 	return either(func(input []string) (ast.Node, []string, bool) {
-		open, rest, ok := str("{")(input)
+		_, rest, ok := optional(typ())(input)
+
+		open, rest, ok := str("{")(rest)
 		if !ok {
 			return nil, input, ok
 		}

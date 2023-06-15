@@ -4,13 +4,13 @@ import "michaelcanudas.dough/ast"
 
 func multiplicative() Parser[ast.Node] {
 	return either(func(input []string) (ast.Node, []string, bool) {
-		factor, rest, ok := parenthesis()(input)
+		factor, rest, ok := negative()(input)
 		if !ok {
 			return nil, input, ok
 		}
 
 		return multiplicativeHelper(factor)(rest)
-	}, parenthesis())
+	}, negative())
 }
 
 func multiplicativeHelper(factor ast.Node) Parser[ast.Node] {
@@ -26,9 +26,9 @@ func multiplicativeHelper(factor ast.Node) Parser[ast.Node] {
 }
 
 func mul(lhs ast.Node) Parser[ast.Node] {
-	return binary("*", parenthesis())(lhs)
+	return binary("*", negative())(lhs)
 }
 
 func div(lhs ast.Node) Parser[ast.Node] {
-	return binary("/", parenthesis())(lhs)
+	return binary("/", negative())(lhs)
 }
