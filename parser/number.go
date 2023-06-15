@@ -19,6 +19,6 @@ func number() Parser[ast.Node] {
 
 		return ast.NumberNode{
 			Value: value,
-			}, input[1:], true
+		}, input[1:], true
 	}
 }

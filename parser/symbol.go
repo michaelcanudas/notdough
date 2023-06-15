@@ -13,6 +13,6 @@ func symbol(symbol string) Parser[ast.Node] {
 
 		return ast.SymbolNode{
 			Value: value,
-			}, rest, ok
+		}, rest, ok
 	}
 }
