@@ -27,6 +27,8 @@ func Compile(node ast.Node) []interpreter.Instruction {
 		return unary(node.(ast.UnaryNode))
 	case ast.IlExpression:
 		return ilexpr(node.(ast.IlExpression))
+	case ast.If:
+		return ifExpr(node.(ast.If))
 	default:
 		return nil
 	}

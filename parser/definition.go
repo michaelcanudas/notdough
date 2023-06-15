@@ -26,5 +26,5 @@ func definition() Parser[ast.Node] {
 			Assignment: nodes[3].(ast.SymbolNode),
 			Value:      nodes[4],
 		}, rest, ok
-	}, ilExpression())
+	}, IfExpr())
 }
