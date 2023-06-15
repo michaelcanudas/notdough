@@ -1,5 +1,6 @@
 package tests
 
+
 import (
 	"strings"
 
@@ -13,7 +14,18 @@ func init() {
 	RegisterTest("compiler.main", func() {
 		input := `
 {
-print 1 - 2 + 3
+	let x = {
+		5 * 2
+	}
+	let y = 25
+	print (x + y) + 5
+
+	print il {
+		push 70
+		sub
+	}
+
+	print 1 + 2 + 3
 }
 `
 
@@ -21,13 +33,13 @@ print 1 - 2 + 3
 		node := parser.Parse(tokens)
 
 		if node == nil {
-			panic("parse error")
+			panic("parse failed")
 		}
 
 		instructions := compiler.Compile(node)
 
 		if instructions == nil {
-			panic("compiler error")
+			panic("compilation failed")
 		}
 
 		interpreter.Interpret(instructions)

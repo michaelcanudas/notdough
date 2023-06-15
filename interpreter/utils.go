@@ -1,5 +1,7 @@
 package interpreter
 
+import "michaelcanudas.dough/ast"
+
 type Stack[T any] []T
 
 // Push pushes an element to the top of a stack.
@@ -22,9 +24,20 @@ func (stack *Stack[T]) Peek() T {
 	return result
 }
 
-func HasBitwiseModifier(fields []string) bool {
+func HasBitwiseModifier(arg ast.Node) bool {
 	const bitwiseKeyword string = "bits" // should this be "bitwise" instead ?
-	return len(fields) >= 2 && fields[1] == bitwiseKeyword
+
+	if arg == nil {
+		return false
+	}
+
+	ident, ok := arg.(ast.IdentifierNode)
+
+	if !ok {
+		return false
+	}
+
+	return ident.Value == bitwiseKeyword
 }
 
 func FindEndif(ctx *Context) int64 {

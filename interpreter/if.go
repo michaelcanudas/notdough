@@ -1,10 +1,14 @@
 package interpreter
 
+import (
+	"michaelcanudas.dough/ast"
+)
+
 type If struct {
 }
 
 func init() {
-	RegisterInstruction("if", func(fields []string) Instruction {
+	RegisterInstruction("if", func(arg ast.Node) Instruction {
 		return If{}
 	})
 }

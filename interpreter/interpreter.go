@@ -10,6 +10,7 @@ func Interpret(instructions []Instruction) {
 		Pointer:        0,
 	}
 
+
 	for i := 0; i < len(context.Instructions); i++ {
 		instruction, ok := context.Instructions[i].(NamedInstruction)
 		if ok {
@@ -21,16 +22,4 @@ func Interpret(instructions []Instruction) {
 		context.Instructions[context.Pointer].execute(&context)
 		context.Pointer++
 	}
-}
-
-type InstructionProviderMap map[string]func(fields []string) Instruction
-
-var RegisteredInstructionProviders InstructionProviderMap
-
-func RegisterInstruction(name string, createInstruction func(fields []string) Instruction) {
-	if RegisteredInstructionProviders == nil {
-		RegisteredInstructionProviders = make(InstructionProviderMap)
-	}
-
-	RegisteredInstructionProviders[name] = createInstruction
 }

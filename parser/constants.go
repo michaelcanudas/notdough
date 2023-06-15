@@ -5,5 +5,6 @@ func keywords() []string {
 		"let",
 		"return",
 		"int",
+		"il",
 	}
 }

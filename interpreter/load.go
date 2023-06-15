@@ -3,6 +3,7 @@ package interpreter
 import (
 	"errors"
 	"fmt"
+	"michaelcanudas.dough/ast"
 )
 
 type Load struct {
@@ -10,9 +11,9 @@ type Load struct {
 }
 
 func init() {
-	RegisterInstruction("load", func(fields []string) Instruction {
+	RegisterInstruction("load", func(arg ast.Node) Instruction {
 		return Load{
-			Identifier: fields[1],
+			Identifier: arg.(ast.IlVariableNode).VarName.Value,
 		}
 	})
 }

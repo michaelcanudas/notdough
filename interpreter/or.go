@@ -1,13 +1,17 @@
 package interpreter
 
+import (
+	"michaelcanudas.dough/ast"
+)
+
 type Or struct {
 	Bitwise bool
 }
 
 func init() {
-	RegisterInstruction("or", func(fields []string) Instruction {
+	RegisterInstruction("or", func(arg ast.Node) Instruction {
 		return Or{
-			Bitwise: HasBitwiseModifier(fields),
+			Bitwise: HasBitwiseModifier(arg),
 		}
 	})
 }

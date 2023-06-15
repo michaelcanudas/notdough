@@ -1,10 +1,14 @@
 package interpreter
 
+import (
+	"michaelcanudas.dough/ast"
+)
+
 type Loop struct {
 }
 
 func init() {
-	RegisterInstruction("loop", func(fields []string) Instruction {
+	RegisterInstruction("loop", func(arg ast.Node) Instruction {
 		return Loop{}
 	})
 }

@@ -1,4 +1,0 @@
-rsrc STRING "HELLO WORLD!!!!! i am patapizza\n\n\nWHAT NO YOU ARE NOT"
-
-load STRING
-printstr

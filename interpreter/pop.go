@@ -1,16 +1,17 @@
 package interpreter
 
-import "strconv"
+import (
+	"michaelcanudas.dough/ast"
+)
 
 type Pop struct {
 	Count int64
 }
 
 func init() {
-	RegisterInstruction("pop", func(fields []string) Instruction {
-		count, _ := strconv.ParseInt(fields[1], 10, 64)
+	RegisterInstruction("pop", func(arg ast.Node) Instruction {
 		return Pop{
-			Count: count,
+			Count: arg.(ast.NumberNode).Value,
 		}
 	})
 }

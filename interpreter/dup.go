@@ -1,10 +1,14 @@
 package interpreter
 
+import (
+	"michaelcanudas.dough/ast"
+)
+
 type Dup struct {
 }
 
 func init() {
-	RegisterInstruction("dup", func(fields []string) Instruction {
+	RegisterInstruction("dup", func(arg ast.Node) Instruction {
 		return Dup{}
 	})
 }

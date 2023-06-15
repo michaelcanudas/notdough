@@ -1,10 +1,14 @@
 package interpreter
 
+import (
+	"michaelcanudas.dough/ast"
+)
+
 type Endfunc struct {
 }
 
 func init() {
-	RegisterInstruction("endfunc", func(fields []string) Instruction {
+	RegisterInstruction("endfunc", func(arg ast.Node) Instruction {
 		return Endfunc{}
 	})
 }

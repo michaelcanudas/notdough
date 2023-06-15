@@ -1,10 +1,14 @@
 package interpreter
 
+import (
+	"michaelcanudas.dough/ast"
+)
+
 type Div struct {
 }
 
 func init() {
-	RegisterInstruction("div", func(fields []string) Instruction {
+	RegisterInstruction("div", func(arg ast.Node) Instruction {
 		return Div{}
 	})
 }

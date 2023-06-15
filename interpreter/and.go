@@ -1,13 +1,17 @@
 package interpreter
 
+import (
+	"michaelcanudas.dough/ast"
+)
+
 type And struct {
 	Bitwise bool
 }
 
 func init() {
-	RegisterInstruction("and", func(fields []string) Instruction {
+	RegisterInstruction("and", func(arg ast.Node) Instruction {
 		return And{
-			Bitwise: HasBitwiseModifier(fields),
+			Bitwise: HasBitwiseModifier(arg),
 		}
 	})
 }

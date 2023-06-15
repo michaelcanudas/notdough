@@ -1,13 +1,17 @@
 package interpreter
 
+import (
+	"michaelcanudas.dough/ast"
+)
+
 type Not struct {
 	Bitwise bool
 }
 
 func init() {
-	RegisterInstruction("not", func(fields []string) Instruction {
+	RegisterInstruction("not", func(arg ast.Node) Instruction {
 		return Not{
-			Bitwise: HasBitwiseModifier(fields),
+			Bitwise: HasBitwiseModifier(arg),
 		}
 	})
 }

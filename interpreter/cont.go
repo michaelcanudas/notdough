@@ -1,10 +1,14 @@
 package interpreter
 
+import (
+	"michaelcanudas.dough/ast"
+)
+
 type Cont struct {
 }
 
 func init() {
-	RegisterInstruction("cont", func(fields []string) Instruction {
+	RegisterInstruction("cont", func(arg ast.Node) Instruction {
 		return Cont{}
 	})
 }

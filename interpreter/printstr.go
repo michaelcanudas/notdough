@@ -1,9 +1,12 @@
 package interpreter
 
-import "fmt"
+import (
+	"fmt"
+	"michaelcanudas.dough/ast"
+)
 
 func init() {
-	RegisterInstruction("printstr", func(fields []string) Instruction {
+	RegisterInstruction("printstr", func(arg ast.Node) Instruction {
 		return Printstr{}
 	})
 }
@@ -12,18 +15,7 @@ type Printstr struct {
 }
 
 func (p Printstr) execute(ctx *Context) {
-	resourceLocation := ctx.ExecutionStack.Pop()
-	instruction, ok := ctx.Instructions[resourceLocation].(Rsrc)
-
-	if !ok {
-		panic("Printstr did not receive a resource!")
-	}
-
-	content, ok := instruction.Content.(StringResourceContent)
-
-	if !ok {
-		panic("Not a string resource!")
-	}
-
-	fmt.Println(content.Value)
+	strLocation := ctx.ExecutionStack.Pop()
+	str := ctx.Instructions[strLocation+1].(Text)
+	fmt.Print(str.Value)
 }

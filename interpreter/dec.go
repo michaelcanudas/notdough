@@ -1,10 +1,14 @@
 package interpreter
 
+import (
+	"michaelcanudas.dough/ast"
+)
+
 type Dec struct {
 }
 
 func init() {
-	RegisterInstruction("dec", func(fields []string) Instruction {
+	RegisterInstruction("dec", func(arg ast.Node) Instruction {
 		return Dec{}
 	})
 }

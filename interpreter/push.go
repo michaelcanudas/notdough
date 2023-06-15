@@ -1,16 +1,17 @@
 package interpreter
 
-import "strconv"
+import (
+	"michaelcanudas.dough/ast"
+)
 
 type Push struct {
 	Value int64
 }
 
 func init() {
-	RegisterInstruction("push", func(fields []string) Instruction {
-		value, _ := strconv.ParseInt(fields[1], 10, 64)
+	RegisterInstruction("push", func(arg ast.Node) Instruction {
 		return Push{
-			Value: value,
+			Value: arg.(ast.NumberNode).Value,
 		}
 	})
 }
