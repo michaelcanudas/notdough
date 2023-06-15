@@ -40,7 +40,7 @@ func HasBitwiseModifier(arg ast.Node) bool {
 	return ident.Value == bitwiseKeyword
 }
 
-func FindEndif(ctx *Context) int64 {
+func FindElseOrEndif(ctx *Context) int64 {
 	loc := ctx.Pointer
 	depth := 1
 
@@ -52,6 +52,10 @@ func FindEndif(ctx *Context) int64 {
 			depth++
 		case Endif:
 			depth--
+		case Else:
+			if depth == 1 {
+				return loc
+			}
 		}
 	}
 

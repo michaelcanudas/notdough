@@ -8,10 +8,11 @@ func $abs
     if
         load $x
         neg
-        ret
+    else
+        load $x
     endif
 
-    load $x
+    ret
 endfunc
 
 read 
