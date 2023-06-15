@@ -4,21 +4,20 @@ import (
 	"michaelcanudas.dough/ast"
 )
 
-
 func instruction() Parser[ast.Node] {
 	return func(input []string) (ast.Node, []string, bool) {
 		opcode, rest, ok := identifier()(input)
-		
+
 		if !ok {
 			return nil, input, false
 		}
-		
+
 		opcodeIdentifier, ok := opcode.(ast.IdentifierNode)
-		
+
 		if !ok {
 			return nil, input, false
 		}
-		
+
 		arg, rest, ok := optional(either(
 			number(),
 			literal(),
@@ -29,17 +28,17 @@ func instruction() Parser[ast.Node] {
 			symbol("<="),
 			symbol(">="),
 			ilvar(),
-			))(rest)
-		
+		))(rest)
+
 		if !ok {
 			return nil, input, false
 		}
-		
+
 		node := ast.IlInstructionNode{
-			OpCode: opcodeIdentifier,
+			OpCode:   opcodeIdentifier,
 			Argument: arg,
 		}
-		
+
 		return node, rest, true
 	}
 }
@@ -47,18 +46,18 @@ func instruction() Parser[ast.Node] {
 func ilvar() Parser[ast.Node] {
 	return func(input []string) (ast.Node, []string, bool) {
 		_, rest, ok := symbol("$")(input)
-		
+
 		if !ok {
 			return nil, input, false
 		}
-		
+
 		name, rest, ok := identifier()(rest)
-		
+
 		nameIdentifier, ok := name.(ast.IdentifierNode)
 		if !ok {
 			return nil, input, false
 		}
-		
+
 		result := ast.IlVariableNode{
 			VarName: nameIdentifier,
 		}
@@ -83,15 +82,15 @@ func ilExpression() Parser[ast.Node] {
 		insts, rest, _ := many(instruction())(rest)
 
 		instructions := []ast.IlInstructionNode{}
-		
+
 		if insts == nil {
 			instructions = nil
 		} else {
-			for	_, i := range insts {
+			for _, i := range insts {
 				instructions = append(instructions, i.(ast.IlInstructionNode))
 			}
 		}
-		
+
 		_, rest, ok = symbol("}")(rest)
 
 		if !ok {
@@ -100,10 +99,10 @@ func ilExpression() Parser[ast.Node] {
 
 		result := ast.IlExpression{
 			Instructions: instructions,
-			}
+		}
 
-			return result, rest, true
-	}, print());
+		return result, rest, true
+	}, print())
 }
 
 // feel free to move this

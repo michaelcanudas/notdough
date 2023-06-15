@@ -18,21 +18,6 @@ func definition() Parser[ast.Node] {
 			nodes[2] = ast.TypeNode{}
 		}
 
-<<<<<<< HEAD
-			if nodes[2] == nil {
-				nodes[2] = ast.TypeNode{}
-			}
-
-			return ast.DefinitionNode{
-				Keyword: nodes[0].(ast.KeywordNode),
-				Identifier: nodes[1].(ast.IdentifierNode),
-				Type: nodes[2].(ast.TypeNode),
-				Assignment: nodes[3].(ast.SymbolNode),
-				Value: nodes[4],
-				}, rest, ok
-		}, ilExpression())(input)
-	}
-=======
 		return ast.DefinitionNode{
 			Keyword:    nodes[0].(ast.KeywordNode),
 			Identifier: nodes[1].(ast.IdentifierNode),
@@ -40,6 +25,5 @@ func definition() Parser[ast.Node] {
 			Assignment: nodes[3].(ast.SymbolNode),
 			Value:      nodes[4],
 		}, rest, ok
-	}, print())
->>>>>>> a061a1eb357a3bf847492450aa1aa5b255b903ef
+	}, ilExpression())
 }
