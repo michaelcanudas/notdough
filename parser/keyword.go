@@ -13,6 +13,6 @@ func keyword(keyword string) Parser[ast.Node] {
 
 		return ast.KeywordNode{
 			Value: value,
-			}, rest, ok
+		}, rest, ok
 	}
 }

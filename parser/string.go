@@ -5,11 +5,11 @@ func str(content string) Parser[string] {
 		if len(input) == 0 {
 			return "", input, false
 		}
-		
+
 		if input[0] == content {
 			return content, input[1:], true
 		}
-		
+
 		return "", input, false
 	}
 }

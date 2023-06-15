@@ -1,7 +1,7 @@
 package parser
 
 func keywords() []string {
-	return []string {
+	return []string{
 		"let",
 		"return",
 		"int",

@@ -5,16 +5,13 @@ import (
 )
 
 func additive() Parser[ast.Node] {
-	var a Parser[ast.Node]
-	a = either(func(input []string) (ast.Node, []string, bool) {
+	return either(func(input []string) (ast.Node, []string, bool) {
 		term, rest, ok := multiplicative()(input)
 		if !ok {
 			return nil, input, ok
 		}
 		return additiveHelper(term)(rest)
 	}, multiplicative())
-
-	return a
 }
 
 // recursively parses operands til we can't no more
